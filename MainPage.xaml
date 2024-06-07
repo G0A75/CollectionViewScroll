@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="clr-namespace:CollectionViewScroll"
+             x:DataType="d:MainPage"
+             x:Class="CollectionViewScroll.MainPage">
+    <Grid RowDefinitions="Auto, *" ColumnDefinitions="*, *, *">
+        <Button Grid.Row="0" Grid.Column="0" Text="1" Clicked="Button_OnClicked"></Button>
+        <Button Grid.Row="0" Grid.Column="1" Text="2" Clicked="Button_OnClicked"></Button>
+        <Button Grid.Row="0" Grid.Column="2" Text="3" Clicked="Button_OnClicked"></Button>
+        <CollectionView x:Name="ThingView"
+                        Grid.Row="1" 
+                        Grid.ColumnSpan="3" 
+                        ItemsSource="{Binding ThingGroups}" 
+                        IsGrouped="True">
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate x:DataType="d:ThingGroup">
+                    <Border Padding="5,5,5,5" Stroke="Black" StrokeShape="RoundRectangle 2,2,2,2">
+                        <Grid RowDefinitions="24" ColumnDefinitions="1*, 1*">
+                            <Label Grid.Column="0" Text="{Binding Name}"
+                                   FontSize="18"
+                                   FontAttributes="Bold" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="d:Thing">
+                    <Border StrokeShape="RoundRectangle 5,5,5,5">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}" />
+                            <Label Text="{Binding Description}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+   
+
+</ContentPage>
